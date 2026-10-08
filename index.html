@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thirty 7even Dining — Modern Australian × Taiwanese</title>
+<meta name="description" content="Macquarie Park's hidden gem. Modern Australian cuisine meets vibrant Asian flavours. Crafted with care by Chef Steve Yang.">
+<style>
+/* ===== RESET & BASE ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  color: #1F1F1F;
+  background: #FAF7F2;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1,h2,h3{font-weight:600;line-height:1.2}
+h1{font-size:clamp(2.6rem,6vw,5rem);letter-spacing:-0.02em}
+h2{font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-0.01em}
+h3{font-size:clamp(1.2rem,2vw,1.5rem)}
+.display-serif{font-family:'Playfair Display','Noto Serif SC',Georgia,'Times New Roman',serif}
+.section-label{
+  font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;
+  color:#D7B088;font-weight:600;margin-bottom:0.5rem
+}
+
+/* ===== NAVIGATION ===== */
+.nav{
+  position:fixed;top:0;left:0;width:100%;z-index:1000;
+  padding:1.2rem 2rem;transition:all 0.4s ease;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.nav.scrolled{
+  background:rgba(250,247,242,0.95);backdrop-filter:blur(16px);
+  padding:0.8rem 2rem;box-shadow:0 1px 20px rgba(0,0,0,0.06);
+}
+.nav-logo{font-size:1.4rem;font-weight:700;color:#FFF;letter-spacing:0.04em;text-decoration:none;transition:color 0.4s}
+.nav.scrolled .nav-logo{color:#1F1F1F}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  color:rgba(255,255,255,0.85);text-decoration:none;font-size:0.85rem;
+  font-weight:500;letter-spacing:0.06em;text-transform:uppercase;
+  transition:color 0.3s;position:relative
+}
+.nav.scrolled .nav-links a{color:#1F1F1F}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;
+  background:#D7B088;transition:width 0.3s ease
+}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-links a:hover,.nav-links a.active{color:#D7B088}
+.nav-cta{
+  background:#D7B088;color:#1F1F1F!important;padding:0.6rem 1.5rem!important;
+  border-radius:6px;font-weight:600!important;font-size:0.8rem!important;
+  transition:all 0.3s ease!important
+}
+.nav-cta:hover{background:#c99a6e;transform:translateY(-1px)}
+.mobile-toggle{display:none;background:none;border:none;cursor:pointer;padding:4px}
+.mobile-toggle span{display:block;width:24px;height:2px;background:#FFF;margin:5px 0;transition:all 0.3s}
+.nav.scrolled .mobile-toggle span{background:#1F1F1F}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;width:100%;height:100vh;min-height:650px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;background:#0a0806
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:url('https://images.squarespace-cdn.com/content/v1/6625a0469ef97e19e4da32dd/698365c2-194e-455a-a822-a677ea59f535/Restaurant+Macquarie+park+Modern+Australian+Taiwanese10.jpg') center/cover no-repeat;
+  filter:brightness(0.25) saturate(0.6);
+  animation:heroZoom 20s ease-in-out infinite alternate
+}
+@keyframes heroZoom{from{transform:scale(1)}to{transform:scale(1.08)}}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.85) 100%)
+}
+/* Ember particles */
+.hero-embers{position:absolute;inset:0;pointer-events:none;z-index:1}
+.ember{
+  position:absolute;width:3px;height:3px;border-radius:50%;
+  background:#D7B088;opacity:0;
+  animation:floatUp var(--dur) var(--delay) infinite ease-out
+}
+@keyframes floatUp{
+  0%{opacity:0;transform:translateY(0) translateX(0) scale(0)}
+  10%{opacity:0.8}
+  50%{opacity:0.4}
+  100%{opacity:0;transform:translateY(-100vh) translateX(var(--drift)) scale(1.5)}
+}
+.hero-content{
+  position:relative;z-index:2;text-align:center;color:#FFF;
+  max-width:750px;padding:0 2rem
+}
+.hero-gold-line{
+  width:60px;height:1.5px;background:#D7B088;margin:0 auto 2rem;
+  opacity:0.7
+}
+.hero-tagline{
+  font-size:0.75rem;text-transform:uppercase;letter-spacing:0.25em;
+  color:rgba(215,176,136,0.8);margin-bottom:1.2rem;font-weight:500
+}
+.hero h1{color:#FFF;margin-bottom:1rem;line-height:1.1}
+.hero h1 .main-title{display:block;font-size:clamp(2.4rem,5.5vw,4.5rem);font-weight:400;letter-spacing:0.04em;margin-bottom:0.3rem}
+.hero h1 .sub-title{display:block;font-size:clamp(1rem,2vw,1.4rem);font-weight:300;letter-spacing:0.1em;color:rgba(255,255,255,0.6)}
+.hero-desc{
+  font-size:0.95rem;color:rgba(255,255,255,0.5);max-width:460px;
+  margin:0 auto 2.5rem;line-height:1.7;font-weight:300
+}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:0.85rem 2.2rem;border-radius:4px;
+  font-size:0.82rem;font-weight:500;text-decoration:none;
+  letter-spacing:0.12em;text-transform:uppercase;
+  transition:all 0.4s ease;cursor:pointer;border:none
+}
+.btn-primary{background:#D7B088;color:#1A1612}
+.btn-primary:hover{background:#e0c4a0;transform:translateY(-2px);box-shadow:0 6px 30px rgba(215,176,136,0.3)}
+.btn-outline{background:transparent;color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.2)}
+.btn-outline:hover{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.5);color:#FFF;transform:translateY(-2px)}
+.scroll-hint{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  color:rgba(255,255,255,0.25);font-size:0.7rem;letter-spacing:0.15em;
+  animation:bounce 2.5s infinite;cursor:default
+}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(10px)}}
+
+/* ===== SECTIONS ===== */
+.section{padding:6rem 2rem}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:4rem}
+.section-header h2{margin-bottom:0.8rem}
+.section-header p{color:#6B5E53;max-width:560px;margin:0 auto;font-size:1.05rem}
+
+/* ===== STORY ===== */
+.story-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center
+}
+.story-image{
+  position:relative;border-radius:4px;overflow:hidden;
+  aspect-ratio:4/5;box-shadow:0 20px 60px rgba(0,0,0,0.15)
+}
+.story-image img{width:100%;height:100%;object-fit:cover;transition:transform 0.8s}
+.story-image:hover img{transform:scale(1.04)}
+.story-text h3{font-size:1.6rem;margin-bottom:1rem;color:#1F1F1F;line-height:1.3}
+.story-text .story-lead{color:#6B5E53;font-size:0.95rem;margin-bottom:1.8rem;line-height:1.8}
+.story-pillars{display:flex;flex-direction:column;gap:1.2rem;margin-bottom:1.8rem}
+.story-pillar{display:flex;gap:1rem;align-items:flex-start}
+.story-pillar .pillar-icon{font-size:1.3rem;flex-shrink:0;width:2rem;text-align:center}
+.story-pillar .pillar-text h4{font-size:0.9rem;font-weight:600;margin-bottom:0.15rem}
+.story-pillar .pillar-text p{font-size:0.82rem;color:#8B7D6C;line-height:1.5}
+.story-chef{display:flex;align-items:center;gap:1rem;padding-top:0.5rem}
+.story-chef .chef-name{font-weight:600;color:#1F1F1F;font-size:0.9rem}
+.story-chef .chef-title{font-size:0.8rem;color:#8B7D6C}
+
+/* ===== DISHES ===== */
+.dishes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.dish-card{
+  background:#FFF;border-radius:16px;overflow:hidden;
+  box-shadow:0 2px 20px rgba(0,0,0,0.04);
+  transition:all 0.4s ease;cursor:default
+}
+.dish-card:hover{transform:translateY(-8px);box-shadow:0 16px 48px rgba(0,0,0,0.1)}
+.dish-image{aspect-ratio:4/3;overflow:hidden;position:relative}
+.dish-image img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s}
+.dish-card:hover .dish-image img{transform:scale(1.06)}
+.dish-badge{
+  position:absolute;top:1rem;right:1rem;background:#D7B088;color:#1F1F1F;
+  padding:0.3rem 0.8rem;border-radius:20px;font-size:0.7rem;font-weight:700;
+  letter-spacing:0.06em;text-transform:uppercase
+}
+.dish-body{padding:1.5rem}
+.dish-body h3{font-size:1.15rem;margin-bottom:0.4rem}
+.dish-body .dish-desc{color:#6B5E53;font-size:0.88rem;line-height:1.6;margin-bottom:0.8rem}
+.dish-body .dish-price{font-weight:700;color:#D7B088;font-size:1.1rem}
+
+/* ===== MENU ===== */
+.menu-tabs{display:flex;justify-content:center;gap:0.5rem;margin-bottom:3rem;flex-wrap:wrap}
+.menu-tab{
+  padding:0.6rem 1.8rem;border-radius:30px;border:1.5px solid rgba(215,176,136,0.3);
+  background:transparent;color:#6B5E53;font-size:0.85rem;font-weight:500;
+  cursor:pointer;transition:all 0.3s;letter-spacing:0.03em
+}
+.menu-tab:hover,.menu-tab.active{background:#D7B088;color:#1F1F1F;border-color:#D7B088}
+.menu-section{display:none}
+.menu-section.active{display:block;animation:fadeUp 0.5s ease}
+.menu-cat-img{width:100%;height:180px;object-fit:cover;border-radius:8px;margin-bottom:1.2rem;display:none}
+.menu-section.active .menu-cat-img{display:block}
+.menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.menu-item{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:1.2rem 1.5rem;background:#FFF;border-radius:10px;
+  transition:all 0.3s;border:1px solid transparent
+}
+.menu-item:hover{border-color:rgba(215,176,136,0.3);box-shadow:0 4px 16px rgba(0,0,0,0.04)}
+.menu-item-info{flex:1}
+.menu-item-info h4{font-size:0.95rem;font-weight:600;margin-bottom:0.2rem}
+.menu-item-info p{font-size:0.8rem;color:#8B7D6C;line-height:1.5}
+.menu-item-price{font-weight:700;color:#D7B088;font-size:1rem;white-space:nowrap;margin-left:1rem}
+.menu-note{text-align:center;margin-top:2rem;font-size:0.82rem;color:#AAA;font-style:italic}
+
+/* ===== REVIEWS ===== */
+.reviews-section{background:#FFF}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.review-card{
+  background:#FAF7F2;border-radius:12px;padding:2rem;
+  transition:all 0.3s ease;position:relative
+}
+.review-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.08)}
+.review-stars{color:#D7B088;font-size:1rem;letter-spacing:0.15em;margin-bottom:1rem}
+.review-text{font-size:0.9rem;color:#5C4F42;line-height:1.7;margin-bottom:1.2rem;font-style:italic}
+.review-author{font-weight:600;color:#1F1F1F;font-size:0.85rem}
+.review-source{font-size:0.75rem;color:#8B7D6C;margin-top:0.2rem}
+.review-platform{font-size:0.7rem;color:#AAA;margin-top:0.8rem;text-transform:uppercase;letter-spacing:0.08em}
+@media(max-width:768px){.reviews-grid{grid-template-columns:1fr}}
+
+/* ===== RESERVATION ===== */
+.reservation-section{background:#FFF}
+.reservation-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.reservation-form{background:#FAF7F2;padding:2.5rem;border-radius:16px}
+.reservation-form h3{font-size:1.4rem;margin-bottom:1.5rem}
+.form-group{margin-bottom:1.2rem}
+.form-group label{display:block;font-size:0.82rem;font-weight:600;color:#5C4F42;margin-bottom:0.3rem;letter-spacing:0.04em}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;padding:0.8rem 1rem;border:1.5px solid rgba(215,176,136,0.25);
+  border-radius:8px;background:#FFF;font-size:0.9rem;font-family:inherit;
+  color:#1F1F1F;transition:border-color 0.3s
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  outline:none;border-color:#D7B088;box-shadow:0 0 0 3px rgba(215,176,136,0.1)
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.8rem}
+.btn-submit{
+  width:100%;padding:1rem;background:#D7B088;color:#1F1F1F;
+  border:none;border-radius:8px;font-size:0.95rem;font-weight:600;
+  cursor:pointer;letter-spacing:0.04em;transition:all 0.3s;margin-top:0.5rem
+}
+.btn-submit:hover{background:#c99a6e;transform:translateY(-1px);box-shadow:0 6px 20px rgba(215,176,136,0.3)}
+.reservation-info h3{font-size:1.6rem;margin-bottom:1.2rem}
+.reservation-info p{color:#6B5E53;margin-bottom:1rem;font-size:0.98rem}
+.info-block{margin:1.5rem 0}
+.info-row{display:flex;gap:1rem;padding:0.8rem 0;border-bottom:1px solid rgba(215,176,136,0.15);font-size:0.9rem}
+.info-row .label{font-weight:600;min-width:80px;color:#5C4F42}
+.booking-platforms{display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap}
+.booking-platforms .btn{font-size:0.82rem;padding:0.7rem 1.5rem}
+
+/* ===== LOCATION ===== */
+.location-map{
+  width:100%;height:320px;border-radius:16px;overflow:hidden;
+  box-shadow:0 4px 24px rgba(0,0,0,0.06);margin-bottom:2rem;background:#e8e4de
+}
+.location-details{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;text-align:center}
+.location-card{padding:1.5rem}
+.location-card .icon{font-size:2rem;margin-bottom:0.8rem}
+.location-card h4{font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;color:#8B7D6C;margin-bottom:0.5rem}
+.location-card p{color:#1F1F1F;font-size:0.95rem;font-weight:500}
+
+/* ===== FOOTER ===== */
+.footer{
+  background:#1A1612;color:rgba(255,255,255,0.7);padding:4rem 2rem 2rem
+}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.footer-brand h3{color:#FFF;font-size:1.4rem;margin-bottom:0.8rem}
+.footer-brand p{font-size:0.88rem;line-height:1.7;margin-bottom:1.2rem}
+.footer-social{display:flex;gap:1rem}
+.footer-social a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.85rem;transition:color 0.3s}
+.footer-social a:hover{color:#D7B088}
+.footer-nav h4{color:#D7B088;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.2rem}
+.footer-nav ul{list-style:none}
+.footer-nav li{margin-bottom:0.6rem}
+.footer-nav a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.88rem;transition:color 0.3s}
+.footer-nav a:hover{color:#FFF}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,0.08);padding-top:2rem;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+  font-size:0.8rem;color:rgba(255,255,255,0.35)
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.animate{opacity:0;transform:translateY(30px);transition:all 0.7s cubic-bezier(0.25,0.46,0.45,0.94)}
+.animate.visible{opacity:1;transform:translateY(0)}
+
+/* ===== MODAL ===== */
+.modal{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;padding:1rem}
+.modal.active{display:flex}
+.modal-content{background:#FFF;border-radius:16px;padding:2.5rem;max-width:480px;width:100%;text-align:center;animation:fadeUp 0.4s ease}
+.modal-content .icon{font-size:3rem;margin-bottom:1rem}
+.modal-content h3{font-size:1.3rem;margin-bottom:0.5rem}
+.modal-content p{color:#6B5E53;font-size:0.9rem;margin-bottom:1.5rem}
+.modal-close{
+  padding:0.6rem 2rem;background:#1F1F1F;color:#FFF;border:none;
+  border-radius:8px;cursor:pointer;font-weight:600;font-size:0.88rem
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .nav-links.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;width:100%;
+    background:#FAF7F2;padding:1.5rem 2rem;gap:1.2rem;box-shadow:0 10px 30px rgba(0,0,0,0.1)}
+  .nav-links.open a{color:#1F1F1F}
+  .mobile-toggle{display:block}
+  .story-grid{grid-template-columns:1fr;gap:2rem}
+  .dishes-grid{grid-template-columns:1fr}
+  .menu-grid{grid-template-columns:1fr}
+  .reservation-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .location-details{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr;gap:2rem}
+  .section{padding:4rem 1.2rem}
+  .hero h1{font-size:2.2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">THIRTY 7EVEN</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#dishes">Dishes</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#reserve" class="nav-cta">Reserve</a></li>
+  </ul>
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-embers" id="emberContainer"></div>
+  <div class="hero-content">
+    <p class="hero-tagline">Macquarie Park &nbsp;·&nbsp; Since 2022</p>
+    <div class="hero-gold-line"></div>
+    <h1 class="display-serif">
+      <span class="main-title">Made With Heart.</span>
+      <span class="main-title">Served With Pride.</span>
+      <span class="sub-title">用心做菜，以诚待客 &nbsp;—&nbsp; Chef Steve Yang</span>
+    </h1>
+    <p class="hero-desc">Modern Australian produce. Taiwanese soul. Every dish a reflection of quality ingredients and the flavours that bring people together.</p>
+    <div class="hero-btns">
+      <a href="#reserve" class="btn btn-primary">Book a Table</a>
+      <a href="#menu" class="btn btn-outline">View Our Menu</a>
+    </div>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</section>
+
+<!-- STORY -->
+<section class="section" id="story">
+  <div class="section-inner">
+    <div class="story-grid">
+      <div class="story-image animate">
+        <img src="https://images.squarespace-cdn.com/content/v1/6625a0469ef97e19e4da32dd/1743679990004-HJDZ304GNPVVUX5UDRU6/20230710Thirty7evenDiningKWPhotography-254.jpg" alt="Thirty 7even Dining interior" loading="lazy">
+      </div>
+      <div class="story-text animate">
+        <span class="section-label">Our Story</span>
+        <h3 class="display-serif">Taiwanese Heart.<br>Australian Soul.</h3>
+        <p class="story-lead">A neighbourhood gem where Chef Steve Yang brings together the warmth of Taiwanese hospitality and the freshness of Australian produce — in a space that feels like home.</p>
+        <div class="story-pillars">
+          <div class="story-pillar">
+            <div class="pillar-icon">🔀</div>
+            <div class="pillar-text"><h4>Two Cultures, One Kitchen</h4><p>Modern Australian technique meets bold Taiwanese flavours. Every dish is a conversation between two worlds.</p></div>
+          </div>
+          <div class="story-pillar">
+            <div class="pillar-icon">🧑‍🍳</div>
+            <div class="pillar-text"><h4>Handcrafted, Every Day</h4><p>Fresh ingredients. Small batches. No shortcuts. Chef Steve and his team make everything from scratch — including the tofu.</p></div>
+          </div>
+          <div class="story-pillar">
+            <div class="pillar-icon">🏠</div>
+            <div class="pillar-text"><h4>Not a Chain. Not a Secret.</h4><p>56 seats. Fully licensed. A space sculpted with geometric lines and warm wood — designed for long lunches and easy evenings.</p></div>
+          </div>
+        </div>
+        <div class="story-chef">
+          <div>
+            <div class="chef-name">Steve Yang</div>
+            <div class="chef-title">Chef &amp; Owner, Thirty 7even Dining</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNATURE DISHES -->
+<section class="section" id="dishes" style="background:#FFF">
+  <div class="section-inner">
+    <div class="section-header animate">
+      <span class="section-label">Signature Dishes</span>
+      <h2 class="display-serif">Crafted With Care</h2>
+      <p>Each dish blends the best of both worlds — Asian culinary traditions elevated by Australian innovation.</p>
+    </div>
+    <div class="dishes-grid">
+      <div class="dish-card animate">
+        <div class="dish-image">
+          <img src="https://images.squarespace-cdn.com/content/v1/6625a0469ef97e19e4da32dd/d643d61b-508e-4aff-9bad-ae0791d49945/steak.jpg" alt="3 Cup Steak" loading="lazy">
+          <span class="dish-badge">Signature</span>
+        </div>
+        <div class="dish-body">
+          <h3>Three Cup Steak 三杯牛排</h3>
+          <p class="dish-desc">Premium Australian beef braised in the classic Taiwanese "three cup" sauce — soy, sesame oil, and rice wine — with fresh basil and garlic.</p>
+          <span class="dish-price">$38</span>
+        </div>
+      </div>
+      <div class="dish-card animate">
+        <div class="dish-image">
+          <img src="https://images.squarespace-cdn.com/content/v1/6625a0469ef97e19e4da32dd/2c2ad3bf-a06c-4bec-8db5-da2ed72f05ae/rice+bowl.jpg" alt="Truffle Radish Cake" loading="lazy">
+          <span class="dish-badge">Must Try</span>
+        </div>
+        <div class="dish-body">
+          <h3>Truffle Radish Cake 松露萝卜糕</h3>
+          <p class="dish-desc">Crispy-on-the-outside, chewy-inside traditional radish cake, elevated with aromatic truffle oil and topped with delicate bonito flakes.</p>
+          <span class="dish-price">$22</span>
+        </div>
+      </div>
+      <div class="dish-card animate">
+        <div class="dish-image">
+          <img src="https://images.squarespace-cdn.com/content/v1/6625a0469ef97e19e4da32dd/e5a6f233-6684-4576-96ab-3df4afa7d58e/pasta3.jpg" alt="Salted Pork Boscaiola" loading="lazy">
+          <span class="dish-badge">Popular</span>
+        </div>
+        <div class="dish-body">
+          <h3>Salted Pork Boscaiola 咸猪肉意面</h3>
+          <p class="dish-desc">Rich and smoky house-cured pork with creamy mushroom sauce, clinging to every bite of al dente pasta — a true fusion comfort dish.</p>
+          <span class="dish-price">$28</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="section" id="menu">
+  <div class="section-inner">
+    <div class="section-header animate">
+      <span class="section-label">All Day Menu</span>
+      <h2 class="display-serif">Made With Heart</h2>
+      <p>From small plates to hearty mains, every dish is crafted with fresh ingredients.</p>
+    </div>
+
+    <div class="menu-tabs">
+      <button class="menu-tab active" data-tab="starters">Small Plates</button>
+      <button class="menu-tab" data-tab="mains">Mains</button>
+      <button class="menu-tab" data-tab="noodles">Noodles &amp; Rice</button>
+      <button class="menu-tab" data-tab="drinks">Drinks</button>
+      <button class="menu-tab" data-tab="desserts">Desserts</button>
+    </div>
+
+    <div class="menu-section active" id="tab-starters">
+      <img class="menu-cat-img" src="https://images.squarespace-cdn.com/content/v1/6625a0469ef97e19e4da32dd/1769487342137-EQC124ST5DEJP2J0YR04/focaccia.jpg" alt="Small Plates" loading="lazy">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-item-info"><h4>Prawn Wonton 鲜虾云吞</h4><p>Hand-wrapped with whole prawns in a delicate broth</p></div><span class="menu-item-price">$16</span></div>
+        <div class="menu-item"><div class="menu-item-info"><h4>Grilled Octopus 烤章鱼</h4><p>With Taiwanese golden kimchi and charred lemon</p></div><span class="menu-item-price">$26</span></div>
+        <div class="menu-item"><div class="menu-item-info"><h4>Peanut Tofu 花生豆腐</h4><p>Silky house-made tofu with crushed peanut and sesame</p></div><span class="menu-item-price">$14</span></div>
+        <div class="menu-item"><div class="menu-item-info"><h4>Burrata Salsa 布拉塔沙拉</h4><p>Creamy burrata with crispy tofu skin and heirloom tomatoes</p></div><span class="menu-item-price">$18</span></div>
+        <div class="menu-item"><div class="menu-item-info"><h4>Oyster Mushrooms 炸蚝菇</h4><p>Deep-fried with a magical dusting of plum powder</p></div><span class="menu-item-price">$15</span></div>
+        <div class="menu-item"><div class="menu-item-info"><h4>Nori Rice Cracker 海苔米饼</h4><p>Crispy rice cracker wrapped with seasoned nori</p></div><span class="menu-item-price">$12</span></div>
+      </div>
+    </div>
+
+    <div class="menu-section" id="tab-mains">
+      <img class="menu-cat-img" src="https://images.squarespace-cdn.com/content/v1/6625a0469ef97e19e4da32dd/d643d61b-508e-4aff-9bad-ae0791d49945/steak.jpg" alt="Mains" loading="lazy">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-item-info"><h4>Three Cup Steak 三杯牛排</h4><p>Braised in soy, sesame oil &amp; rice wine with basil</p></div><span class="menu-item-price">$38</span></div>
+        <div class="menu-item"><div class="menu-item-info"><h4>Garlic Prawn Pasta 蒜香大虾意面</h4><p>Juicy prawns with garlicky kick &amp; Asian-inspired zest</p></div><span class="menu-item-price">$29</span></div>
+        <div class="menu-item"><div class="menu-item-info"><h4>Salted Pork Boscaiola 咸猪肉</h4><p>House-cured pork with creamy mushroom sauce</p></div><span class="menu-item-price">$28</span></div>
+        <div class="menu-item"><div class="menu-item-info"><h4>Drunken Duck 醉鸭</h4><p>Slow-cooked with pickled cucumbers &amp; Shaoxing wine</p></div><span class="menu-item-price">$34</span></div>
+        <div class="menu-item"><div class="menu-item-info"><h4>Sweet &amp; Sour Pork 咕噜肉</h4><p>Classic rendition with local greens on the side</p></div><span class="menu-item-price">$24</span></div>
+        <div class="menu-item"><div class="menu-item-info"><h4>Barramundi 盲曹鱼</h4><p>Pan-seared Australian barramundi with ginger-scallion</p></div><span class="menu-item-price">$32</span></div>
+      </div>
+    </div>
+
+    <div class="menu-section" id="tab-noodles">
+      <img class="menu-cat-img" src="https://images.squarespace-cdn.com/content/v1/6625a0469ef97e19e4da32dd/2c2ad3bf-a06c-4bec-8db5-da2ed72f05ae/rice+bowl.jpg" alt="Noodles &amp; Rice" loading="lazy">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-item-info"><h4>Taiwanese Beef Noodles 台湾牛肉面</h4><p>Rich braised beef broth with hand-pulled noodles</p></div><span class="menu-item-price">$24</span></div>
+        <div class="menu-item"><div class="menu-item-info"><h4>Burger Fried Rice 汉堡炒饭</h4><p>Our signature fusion — you've never had fried rice like this</p></div><span class="menu-item-price">$22</span></div>
+        <div class="menu-item"><div class="menu-item-info"><h4>Seafood Congee 海鲜粥</h4><p>Slow-cooked rice porridge with fresh seafood medley</p></div><span class="menu-item-price">$20</span></div>
+        <div class="menu-item"><div class="menu-item-info"><h4>Truffle Radish Cake 松露萝卜糕</h4><p>Crispy-chewy with aromatic truffle and bonito flakes</p></div><span class="menu-item-price">$22</span></div>
+      </div>
+    </div>
+
+    <div class="menu-section" id="tab-drinks">
+      <img class="menu-cat-img" src="https://images.squarespace-cdn.com/content/v1/6625a0469ef97e19e4da32dd/1d5166f8-ded0-47c0-824b-cc176b9f2557/specialty+drink.jpg" alt="Drinks" loading="lazy">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-item-info"><h4>Apple Bubbly Long Black</h4><p>Crisp apple, bubbly effervescence, and bold espresso in perfect harmony — our signature coffee</p></div><span class="menu-item-price">$9</span></div>
+        <div class="menu-item"><div class="menu-item-info"><h4>Matcha Latte 抹茶拿铁</h4><p>Premium ceremonial grade matcha — one of the best in the area</p></div><span class="menu-item-price">$7</span></div>
+        <div class="menu-item"><div class="menu-item-info"><h4>Wintermelon Cocktail 冬瓜鸡尾酒</h4><p>Refreshing wintermelon tea with a spirited twist</p></div><span class="menu-item-price">$16</span></div>
+        <div class="menu-item"><div class="menu-item-info"><h4>Specialty Coffee 精品咖啡</h4><p>Handcrafted espresso drinks made with care</p></div><span class="menu-item-price">$5–$8</span></div>
+        <div class="menu-item"><div class="menu-item-info"><h4>Taiwanese Craft Beer 台湾精酿</h4><p>Rotating selection of imported Taiwanese craft beers</p></div><span class="menu-item-price">$12</span></div>
+        <div class="menu-item"><div class="menu-item-info"><h4>Selection of Wine 精选葡萄酒</h4><p>Australian and international wines by the glass</p></div><span class="menu-item-price">$12–$18</span></div>
+      </div>
+    </div>
+
+    <div class="menu-section" id="tab-desserts">
+      <img class="menu-cat-img" src="https://images.squarespace-cdn.com/content/v1/6625a0469ef97e19e4da32dd/3a0b9d19-70a2-4ac0-a33c-8cbca5079613/food.jpg" alt="Desserts" loading="lazy">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-item-info"><h4>Taro Cheesecake 芋头芝士蛋糕</h4><p>Velvety taro-infused cheesecake — a guest favourite</p></div><span class="menu-item-price">$16</span></div>
+        <div class="menu-item"><div class="menu-item-info"><h4>Taiwanese Pineapple Cake 凤梨酥</h4><p>Buttery pastry with sweet pineapple jam filling</p></div><span class="menu-item-price">$12</span></div>
+        <div class="menu-item"><div class="menu-item-info"><h4>Mango Sago 杨枝甘露</h4><p>Classic Hong Kong-style chilled mango and sago dessert</p></div><span class="menu-item-price">$14</span></div>
+      </div>
+    </div>
+
+    <p class="menu-note">Menu items and prices are subject to change. Gluten-free and vegetarian options available — please ask our staff.</p>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="section reviews-section" id="reviews">
+  <div class="section-inner">
+    <div class="section-header animate">
+      <span class="section-label">What Our Guests Say</span>
+      <h2 class="display-serif">Loved by Locals</h2>
+      <p>4.8 ★ on Google — 310+ reviews and counting</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card animate">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"As a Taiwanese, this is the restaurant that I want to support. I can definitely feel the warmth from the staff. Highly recommend to all Macquarie students."</p>
+        <div class="review-author">Tzu-I Yang</div>
+        <div class="review-source">Google Review · 2 months ago</div>
+        <div class="review-platform">google</div>
+      </div>
+      <div class="review-card animate">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"This place nails the perfect fusion — comforting Aussie classics with a vibrant Asian twist. The salted pork boscaiola was rich, smoky, and packed with flavour. Pure brunch bliss!"</p>
+        <div class="review-author">Leo Yeh</div>
+        <div class="review-source">Google Review · 4 months ago</div>
+        <div class="review-platform">google</div>
+      </div>
+      <div class="review-card animate">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"This restaurant is a hidden gem with innovative food, relaxing atmosphere and splendid service. We highly recommend the prawn wonton, 3 cup steak, and taro cheesecake."</p>
+        <div class="review-author">Trip.com Guest</div>
+        <div class="review-source">Trip.com · 2025</div>
+        <div class="review-platform">trip.com</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVATION -->
+<section class="section reservation-section" id="reserve">
+  <div class="section-inner">
+    <div class="reservation-grid">
+      <div class="reservation-form animate">
+        <h3 class="display-serif">Make a Reservation</h3>
+        <form id="reservationForm">
+          <div class="form-group"><label>Name</label><input type="text" placeholder="Your name" required></div>
+          <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com" required></div>
+          <div class="form-group"><label>Phone</label><input type="tel" placeholder="04XX XXX XXX"></div>
+          <div class="form-row">
+            <div class="form-group"><label>Date</label><input type="date" required></div>
+            <div class="form-group"><label>Time</label><select><option>11:30 AM</option><option>12:00 PM</option><option>12:30 PM</option><option>1:00 PM</option><option>1:30 PM</option><option>5:30 PM</option><option>6:00 PM</option><option>6:30 PM</option><option>7:00 PM</option><option>7:30 PM</option><option>8:00 PM</option></select></div>
+            <div class="form-group"><label>Guests</label><select><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8+</option></select></div>
+          </div>
+          <div class="form-group"><label>Special Requests</label><textarea placeholder="Dietary needs, special occasions..." rows="2"></textarea></div>
+          <button type="submit" class="btn-submit">Request Reservation</button>
+        </form>
+      </div>
+      <div class="reservation-info animate">
+        <span class="section-label">Visit Us</span>
+        <h3 class="display-serif">Hours &amp; Location</h3>
+        <p>Nestled in the heart of Macquarie Park, just a short stroll from Macquarie University and Macquarie Centre.</p>
+        <div class="info-block">
+          <div class="info-row"><span class="label">📍 Address</span><span>Shop 5/3 Mooltan Ave, Macquarie Park NSW 2113</span></div>
+          <div class="info-row"><span class="label">📞 Phone</span><span><a href="tel:+61478290982" style="color:#D7B088;text-decoration:none">0478 290 982</a></span></div>
+          <div class="info-row"><span class="label">🕐 Mon</span><span>Closed</span></div>
+          <div class="info-row"><span class="label">🕐 Tue–Thu</span><span>11:30 AM – 2:30 PM &nbsp;|&nbsp; 5:00 PM – 9:00 PM</span></div>
+          <div class="info-row"><span class="label">🕐 Fri–Sat</span><span>11:30 AM – 2:30 PM &nbsp;|&nbsp; 5:00 PM – 10:00 PM</span></div>
+          <div class="info-row"><span class="label">🕐 Sun</span><span>8:30 AM – 3:00 PM</span></div>
+          <div class="info-row"><span class="label">🍽️ Seats</span><span>56 &nbsp;|&nbsp; 🍺 Fully Licensed &nbsp;|&nbsp; 🌿 GF &amp; Veg Options</span></div>
+        </div>
+        <div class="booking-platforms">
+          <a href="https://www.firsttable.com.au/sydney/north-shore/macquarie-park/thirty-7even-dining" target="_blank" rel="noopener" class="btn btn-outline" style="color:#1F1F1F;border-color:rgba(31,31,31,0.2)">Book via First Table</a>
+          <a href="tel:+61478290982" class="btn btn-primary">Call Us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="section" style="padding-top:0">
+  <div class="section-inner">
+    <div class="location-map">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3315.9050706596076!2d151.1187!3d-33.7765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12a5a42f8a5e1d%3A0x8a0e3dd7c0d38f2f!2s3%20Mooltan%20Ave%2C%20Macquarie%20Park%20NSW%202113!5e0!3m2!1sen!2sau!4v1700000000000" width="100%" height="100%" style="border:0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Thirty 7even Dining location"></iframe>
+    </div>
+    <div class="location-details">
+      <div class="location-card">
+        <div class="icon">🚉</div>
+        <h4>Nearest Station</h4>
+        <p>Macquarie University<br>Metro Station</p>
+      </div>
+      <div class="location-card">
+        <div class="icon">🎓</div>
+        <h4>Walk from MQ</h4>
+        <p>5 minutes<br>from Campus</p>
+      </div>
+      <div class="location-card">
+        <div class="icon">🅿️</div>
+        <h4>Parking</h4>
+        <p>Street parking<br>&amp; Macquarie Centre</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3 class="display-serif">Thirty 7even Dining</h3>
+        <p>Modern Australian × Taiwanese fusion in the heart of Macquarie Park. Fresh ingredients, warm service, and food that brings people together.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/thirty_7even_dining/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.facebook.com/p/Thirty-7EVEN-Dining-100084263723861/" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://www.tiktok.com/@thirty7evendining" target="_blank" rel="noopener">TikTok</a>
+        </div>
+      </div>
+      <div class="footer-nav">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#story">Our Story</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#reserve">Reservations</a></li>
+          <li><a href="#dishes">Signature Dishes</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+61478290982">0478 290 982</a></li>
+          <li>Shop 5/3 Mooltan Ave</li>
+          <li>Macquarie Park NSW 2113</li>
+          <li><a href="mailto:hello@thirty7even.com.au">hello@thirty7even.com.au</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Thirty 7even Dining. All rights reserved.</span>
+      <span>Website by Hermes &times; 高兴</span>
+    </div>
+  </div>
+</footer>
+
+<!-- SUCCESS MODAL -->
+<div class="modal" id="successModal">
+  <div class="modal-content">
+    <div class="icon">✅</div>
+    <h3>Reservation Request Sent!</h3>
+    <p>We'll confirm your booking within 24 hours. For immediate assistance, call us at <strong>0478 290 982</strong>.</p>
+    <button class="modal-close" onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<script>
+// === EMBER PARTICLES ===
+(function(){
+  const container = document.getElementById('emberContainer');
+  if(!container) return;
+  const count = 35;
+  for(let i=0;i<count;i++){
+    const ember = document.createElement('div');
+    ember.className = 'ember';
+    ember.style.cssText = `
+      --dur:${3+Math.random()*6}s;
+      --delay:${Math.random()*8}s;
+      --drift:${(Math.random()-0.5)*120}px;
+      left:${Math.random()*100}%;
+      top:${60+Math.random()*40}%;
+      width:${1.5+Math.random()*3}px;
+      height:${1.5+Math.random()*3}px;
+    `;
+    container.appendChild(ember);
+  }
+})();
+
+// NAV SCROLL
+const nav = document.getElementById('nav');
+const mobileToggle = document.getElementById('mobileToggle');
+const navLinks = document.getElementById('navLinks');
+
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+});
+
+mobileToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+
+// SMOOTH SCROLL + NAV CLOSE
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    navLinks.classList.remove('open');
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// INTERSECTION OBSERVER ANIMATIONS
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+
+// MENU TABS
+document.querySelectorAll('.menu-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+  });
+});
+
+// RESERVATION FORM
+document.getElementById('reservationForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  document.getElementById('successModal').classList.add('active');
+  this.reset();
+});
+
+function closeModal() {
+  document.getElementById('successModal').classList.remove('active');
+}
+
+// CLOSE MODAL ON OUTSIDE CLICK
+document.getElementById('successModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// ACTIVE NAV LINK HIGHLIGHT
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const top = section.offsetTop - 120;
+    if (window.scrollY >= top) current = section.getAttribute('id');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
